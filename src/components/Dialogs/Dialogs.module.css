@@ -1,0 +1,22 @@
+.dialogsContainer {
+    display: grid;
+    background-color: azure;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogsFronts {
+    display: grid;
+   
+    grid-template-columns: 6fr 6fr;
+}
+
+
+.dialog {
+    text-decoration: none;
+    color: black;
+}
+
+
+.active {
+    color: goldenrod;
+}

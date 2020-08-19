@@ -1,37 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
+import Header from './components/Header/Header';
+import Nav from './components/Nav/Nav';
+import Profile from './components/Profile/Profile';
+import Music from './components/Music/Music';
+import News from './components/News/News';
 import './App.css';
+import Dialogs from './components/Dialogs/Dialogs';
+import {Route, BrowserRouter} from "react-router-dom";
 
-const App = () => {
+const App = (props) => {
   return (
-    <div>
+    <BrowserRouter>
+    <div className = "app-wrapper">
     <Header />
-    <Technologies />
+    <Nav />
+    <div   className = "app-wrapper-content">
+  <Route path = "/Dialogs"  render = {() => <Dialogs state = {props.state}/>} />
+  <Route path = "/Profile"  render = {() => <Profile state = {props.state} addPost = {props.addPost}/>} />
+    <Route path = "/Music"    component = {Music}   />
+    <Route path = "/News"     component = {News}    />
     </div>
+    </div>
+    </BrowserRouter>
   );
 }
 
-const Header = () => {
-  return (
-    <div>
-      <a>Home</a>
-      <a>Message</a>
-      <a>News Feed</a>
-    </div>
-  );
-}
 
-const Technologies = () => {
-  return (
-  <div className="App">
-  Simple HTML
-  <ul>
-    <li>CSS</li>
-    <li>HTML</li>
-    <li>JS</li>
-    <li>REACT</li>
-  </ul>
-</div>
-  );
-}
+
+
 export default App;

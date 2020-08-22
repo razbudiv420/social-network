@@ -1,10 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
-import state from './components/redux/state';
-import {addPost} from './components/redux/state';
+import state from './redux/state';
+
 import { rerenderAll } from './render';
 
 rerenderAll(state);

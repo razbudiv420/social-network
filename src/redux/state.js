@@ -1,4 +1,4 @@
-import { rerenderAll } from './../../render';
+import { rerenderAll } from '../render.js';
 
 let state = { 
    
@@ -25,16 +25,17 @@ let state = {
 },
    postPage: {
     postArr: [
-        {message: 'hello there!', count: '15'},
-        {message: 'hello there!', count: '3'},
-        {message: 'hello there!', count: '1'},
-        {message: 'hello there!', count: '22'},
-        {message: 'hello there!', count: '50'},
-      ]
+        {id: Math.random(1, Date.now()), message: 'hello there!', count: '15'},
+        {id: Math.random(1, Date.now()), message: 'hello there!', count: '3'},
+        {id: Math.random(1, Date.now()), message: 'hello there!', count: '1'},
+        {id: Math.random(1, Date.now()), message: 'hello there!', count: '22'},
+        {id: Math.random(1, Date.now()), message: 'hello there!', count: '50'},
+      ],
+    updatedText:  'hey!'
 }
 }
 
-export let addPost = (newText) => {
+export const addPost = (newText) => {
     
 let newPost = {
         message: newText,
@@ -42,7 +43,11 @@ let newPost = {
     }
 
     state.postPage.postArr.push(newPost);
+    state.postPage.updatedText = '';
     rerenderAll(state);
 }
-
+export const  updatePostText = (newText) => {
+        state.postPage.updatedText = newText;
+        rerenderAll(state);
+    }
 export default state;

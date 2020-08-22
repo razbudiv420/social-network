@@ -1,4 +1,7 @@
-import { rerenderAll } from '../render.js';
+
+let rerenderAll = () => {
+    console.log (state)
+};
 
 let state = { 
    
@@ -50,4 +53,8 @@ export const  updatePostText = (newText) => {
         state.postPage.updatedText = newText;
         rerenderAll(state);
     }
+
+export const subscribe = (observer) => {
+    rerenderAll = observer;
+}
 export default state;

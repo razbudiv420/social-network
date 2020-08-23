@@ -1,6 +1,7 @@
 import React from 'react';
 import ms from './MyPosts.module.css';
 import Post from './Post/Post';
+import { updatePostTextActionCreator, addPostActionCreator } from '../../redux/state';
 const MyPosts = (props) => {
   debugger;
   let post = props.state.postPage.postArr.map(postElement => <Post  key={postElement.id} message={postElement.message}  count={postElement.count}/>);
@@ -8,12 +9,12 @@ const MyPosts = (props) => {
   
   let addText = () => {
     let newText = currText.current.value;
-    props.dispatch({type: 'ADD-NEW-POST', newText: newText});
+    props.dispatch(addPostActionCreator(newText));
   } 
   const update = () => {
     let newText = currText.current.value;
-    props.dispatch({type:'UPDATE-POST-TEXT', newText: newText })
-    console.log(props.state.postPage.updatedText)
+    props.dispatch(updatePostTextActionCreator(newText))
+    
   } 
     return (
         <div className = {ms.space}>

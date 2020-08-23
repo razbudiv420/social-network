@@ -1,3 +1,5 @@
+const ADD_NEW_POST = 'ADD-NEW-POST';
+const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 let store = {
 
 _state: { 
@@ -46,7 +48,7 @@ subscribe (observer) {
 dispatch (action) {
         if(action.type === 'ADD-NEW-POST') {
             let newPost = {
-                message: action.newText,
+                message: this._state.postPage.updatedText,
                 count: 1
             }
         
@@ -57,8 +59,12 @@ dispatch (action) {
             this._state.postPage.updatedText = action.newText;
             this._callSubsciber(this._state);
         }
-        }
-    }
+        },
 
+    }
+ 
+export const addPostActionCreator = () => ({type: ADD_NEW_POST});
+ 
+export const updatePostTextActionCreator = (newText) => ({type: UPDATE_POST_TEXT, newText: newText});
 
 export default store;

@@ -1,9 +1,6 @@
+let store = {
 
-let rerenderAll = () => {
-    console.log (state)
-};
-
-let state = { 
+_state: { 
    
    dialogPage: {
     dialogsData: [
@@ -36,25 +33,32 @@ let state = {
       ],
     updatedText:  'hey!'
 }
-}
+},
 
-export const addPost = (newText) => {
-    
-let newPost = {
-        message: newText,
-        count: 1
+getState () {
+    return this._state
+},
+
+subscribe (observer) {
+    this._callSubsciber = observer;
+},
+
+dispatch (action) {
+        if(action.type === 'ADD-NEW-POST') {
+            let newPost = {
+                message: action.newText,
+                count: 1
+            }
+        
+            this._state.postPage.postArr.push(newPost);
+            this._state.postPage.updatedText = '';
+            this._callSubsciber(this._state);
+        } else if(action.type === 'UPDATE-POST-TEXT'){
+            this._state.postPage.updatedText = action.newText;
+            this._callSubsciber(this._state);
+        }
+        }
     }
 
-    state.postPage.postArr.push(newPost);
-    state.postPage.updatedText = '';
-    rerenderAll(state);
-}
-export const  updatePostText = (newText) => {
-        state.postPage.updatedText = newText;
-        rerenderAll(state);
-    }
 
-export const subscribe = (observer) => {
-    rerenderAll = observer;
-}
-export default state;
+export default store;

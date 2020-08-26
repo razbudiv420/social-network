@@ -1,7 +1,7 @@
-const ADD_NEW_POST = 'ADD-NEW-POST';
-const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
-const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE';
-const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT';
+import dialogReducer from "./dialog-reducer";
+import profileReducer from "./profile-reducer"
+
+
 let store = {
 
 _state: { 
@@ -49,38 +49,12 @@ subscribe (observer) {
 },
 
 dispatch (action) {
-        if(action.type === 'ADD-NEW-POST') {
-            let newPost = {
-                message: this._state.postPage.updatedText,
-                count: 1
-            }
+        this._state.dialogPage = dialogReducer(this._state.dialogPage, action);
+        this._state.postPage = profileReducer(this._state.postPage, action);
+        this._callSubsciber(this._state);
+}
         
-            this._state.postPage.postArr.push(newPost);
-            this._state.postPage.updatedText = '';
-            this._callSubsciber(this._state);
-        }else if(action.type === 'ADD-NEW-MESSAGE') {
-            let newMessage = {
-                name: this._state.dialogPage.messageData.updatedText,
-            }
-            this._state.dialogPage.messageData.right.push(newMessage);
-            this._state.dialogPage.messageData.updatedText = '';
-            this._callSubsciber(this.state);
-        }else if(action.type === 'UPDATE-POST-TEXT'){
-            this._state.postPage.updatedText = action.newText;
-            this._callSubsciber(this._state);
-        } else if(action.type === 'UPDATE-MESSAGE-TEXT') {
-            this._state.dialogPage.messageData.updatedText = action.newText;
-            this._callSubsciber(this._state);
-        } 
-        },
-
     }
  
-export const addPostActionCreator = () => ({type: ADD_NEW_POST});
- 
-export const updatePostTextActionCreator = (newText) => ({type: UPDATE_POST_TEXT, newText: newText});
 
-export const addMessageActionCreator = () => ({type: ADD_NEW_MESSAGE});
-
-export const updateMessageTextActionCreator = (newText) => ({type: UPDATE_MESSAGE_TEXT, newText: newText});
 export default store;

@@ -4,7 +4,7 @@ const ProfileInfo = () => {
 return ( 
     <div>
      <div>
-      <img className = {s.profileImg} src = "https://openimagedenoise.github.io/images/moana_16spp_oidn.jpg"></img>
+      <img alt = "" className = {s.profileImg} src = "https://openimagedenoise.github.io/images/moana_16spp_oidn.jpg"></img>
       </div>
       <div className = {s.description}>
         ava + description

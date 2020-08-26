@@ -1,20 +1,15 @@
 import React from 'react';
 import ms from './MyPosts.module.css';
 import Post from './Post/Post';
-import { updatePostTextActionCreator, addPostActionCreator } from '../../redux/state';
+import { updatePostTextActionCreator, addPostActionCreator } from '../../redux/profile-reducer';
 const MyPosts = (props) => {
-  debugger;
   let post = props.state.postPage.postArr.map(postElement => <Post  key={postElement.id} message={postElement.message}  count={postElement.count}/>);
-  let currText = React.createRef();
   
   let addText = () => {
-    let newText = currText.current.value;
-    props.dispatch(addPostActionCreator(newText));
+    props.dispatch(addPostActionCreator());
   } 
-  const update = () => {
-    let newText = currText.current.value;
-    props.dispatch(updatePostTextActionCreator(newText))
-    
+  const update = (e) => {
+    props.dispatch(updatePostTextActionCreator(e.target.value))
   } 
     return (
         <div className = {ms.space}>
@@ -23,7 +18,7 @@ const MyPosts = (props) => {
           New post
           <div>
           <div>
-          <textarea ref={currText} onChange={update} value={props.state.postPage.updatedText}></textarea>
+          <textarea onChange={update} value={props.state.postPage.updatedText}></textarea>
           </div>
           <div>
           <button onClick = {addText}>Add post</button>

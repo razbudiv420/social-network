@@ -3,6 +3,7 @@ import ms from './MyPosts.module.css';
 import Post from './Post/Post';
 import { updatePostTextActionCreator, addPostActionCreator } from '../../redux/profile-reducer';
 const MyPosts = (props) => {
+  debugger;
   let post = props.state.postPage.postArr.map(postElement => <Post  key={postElement.id} message={postElement.message}  count={postElement.count}/>);
   
   let addText = () => {

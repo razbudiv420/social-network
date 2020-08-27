@@ -3,8 +3,17 @@ const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 export const addPostActionCreator = () => ({type: ADD_NEW_POST});
 export const updatePostTextActionCreator = (newText) => ({type: UPDATE_POST_TEXT, newText: newText});
 
-const profileReducer = (state, action) => {
-    debugger;
+let initialState = {
+    postArr: [
+        {id: Math.random(1, Date.now()), message: 'hello there!', count: '15'},
+        {id: Math.random(1, Date.now()), message: 'hello there!', count: '3'},
+        {id: Math.random(1, Date.now()), message: 'hello there!', count: '1'},
+        {id: Math.random(1, Date.now()), message: 'hello there!', count: '22'},
+        {id: Math.random(1, Date.now()), message: 'hello there!', count: '50'},
+      ],
+    updatedText:  'hey!'
+}
+const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_NEW_POST:
             let newPost = {

@@ -1,16 +1,14 @@
 import React from 'react';
 import ms from './MyPosts.module.css';
 import Post from './Post/Post';
-import { updatePostTextActionCreator, addPostActionCreator } from '../../redux/profile-reducer';
+
 const MyPosts = (props) => {
-  debugger;
-  let post = props.state.postPage.postArr.map(postElement => <Post  key={postElement.id} message={postElement.message}  count={postElement.count}/>);
-  
+  let post = props.post.map(postElement => <Post  key={postElement.id} message={postElement.message}  count={postElement.count}/>);
   let addText = () => {
-    props.dispatch(addPostActionCreator());
+    props.addText();
   } 
   const update = (e) => {
-    props.dispatch(updatePostTextActionCreator(e.target.value))
+    props.update(e.target.value);
   } 
     return (
         <div className = {ms.space}>
@@ -19,7 +17,7 @@ const MyPosts = (props) => {
           New post
           <div>
           <div>
-          <textarea onChange={update} value={props.state.postPage.updatedText}></textarea>
+          <textarea onChange={update} value={props.value}></textarea>
           </div>
           <div>
           <button onClick = {addText}>Add post</button>
@@ -33,3 +31,4 @@ const MyPosts = (props) => {
 }
 
 export default MyPosts;
+

@@ -2,19 +2,19 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from './DialogsItem';
 import Message from './Message';
-import { updateMessageTextActionCreator, addMessageActionCreator } from '../../redux/dialog-reducer';
+
 
 const Dialogs = (props) => {
 
-let dialogsElement = props.state.dialogPage.dialogsData.map((dialog) => <DialogItem name = {dialog.name} id = {dialog.id}/>);
-let Leftmessage = props.state.dialogPage.messageData.left.map((messageEl) => <Message className = {s.dialogLeft} message = {messageEl.name}/> );
-let Rightmessage = props.state.dialogPage.messageData.right.map((messageEl) => <Message className = {s.dialogRight} message = {messageEl.name}/> )
+let dialogsElement = props.dialogsElement.map((dialog) => <DialogItem name = {dialog.name} id = {dialog.id}/>);
+let Leftmessage = props.Leftmessage.map((messageEl) => <Message className = {s.dialogLeft} message = {messageEl.name}/> );
+let Rightmessage = props.Rightmessage.map((messageEl) => <Message className = {s.dialogRight} message = {messageEl.name}/> )
 
 const textHandler  = (e) => {
-     props.dispatch(updateMessageTextActionCreator(e.target.value));
+     props.textHandler(e.target.value);
 }
 const messageHandler = () => {
-    props.dispatch(addMessageActionCreator());
+    props.messageHandler();
 }
     return (
         <div    className = {s.dialogsContainer}>
@@ -28,7 +28,7 @@ const messageHandler = () => {
         <div className = {s.dialogLeft}>
         {Leftmessage}
         </div>
-        <textarea onChange={textHandler} value={props.state.dialogPage.messageData.updatedText}></textarea>
+        <textarea onChange={textHandler} value={props.value}></textarea>
         <button onClick={messageHandler}>Отправить</button>
         </div>
         

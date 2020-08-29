@@ -11,34 +11,30 @@ let initialState = {
         {id: 3, name: 'Andrew'},
         {id: 4, name: 'Kate'}
     ],
-    
-    messageData: {
-        left: [
+        messages: [
         {id: 0, name: 'Hi'},
         {id: 1, name: 'Hello'},
-        ],
-        right: [
         {id: 2, name: 'How are you?'},
         {id: 3, name: 'I\'m fine, thanks'},
         {id: 4, name: 'You are welcome'}
         ],
         updatedText: 'hi'
     }
-}
 const dialogReducer = (state = initialState, action) => {
-    debugger;
     switch(action.type) {
-        case ADD_NEW_MESSAGE:
-            let newMessage = {
-                name: state.messageData.updatedText,
+        case ADD_NEW_MESSAGE: 
+        let messageName = state.updatedText;
+            return {
+                ...state,
+                messages: [...state.messages, {id: 4, name: messageName}],
+                updatedText: ''
             }
-            state.messageData.right.push(newMessage);
-            state.messageData.updatedText = '';
-            return state;
-        ;
+
         case UPDATE_MESSAGE_TEXT:
-            state.messageData.updatedText = action.newText;
-            return state;
+            return {
+                ...state,
+                updatedText: action.newText
+            }
         ;
         default:
             return state;

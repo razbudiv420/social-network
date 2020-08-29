@@ -10,22 +10,26 @@ let initialState = {
         {id: Math.random(1, Date.now()), message: 'hello there!', count: '1'},
         {id: Math.random(1, Date.now()), message: 'hello there!', count: '22'},
         {id: Math.random(1, Date.now()), message: 'hello there!', count: '50'},
+        {id: Math.random(1, Date.now()), message: 'hello there!!', count: '50'},
       ],
     updatedText:  'hey!'
 }
 const profileReducer = (state = initialState, action) => {
+    
     switch (action.type) {
-        case ADD_NEW_POST:
-            let newPost = {
-                message: state.updatedText,
-                count: 1
+        case ADD_NEW_POST: {
+            let message = state.updatedText;
+            return {
+                ...state,
+                postArr: [...state.postArr, {id: 0, message: message, count: '40'}],
+                updatedText: ''
             }
-            state.postArr.push(newPost);
-            state.updatedText = '';
-            return state;
+        }  
         case UPDATE_POST_TEXT:
-            state.updatedText = action.newText;
-            return state;
+            return {
+                ...state,
+                updatedText: action.newText
+            }
         default:
             return state
     }

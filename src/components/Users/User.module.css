@@ -32,3 +32,7 @@
     width: 100px;
     cursor: pointer;
 }
+
+.selectedPage{
+    font-weight: bold;
+}

@@ -10,7 +10,7 @@ class UsersAPIContainer extends React.Component {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             this.props.toggleLoading(false);
             this.props.setUsers(response.data.items)
-           // this.props.setTotalCount(response.data.totalCount)  
+           //this.props.setTotalCount(response.data.totalCount)  
         })
 }
 
@@ -20,7 +20,7 @@ class UsersAPIContainer extends React.Component {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(response => {
             this.props.toggleLoading(false);
             this.props.setUsers(response.data.items)
-         //   this.props.setTotalCount(response.data.totalCount)
+            //this.props.setTotalCount(response.data.totalCount)
     })
 }
 

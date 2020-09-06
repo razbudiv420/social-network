@@ -1,7 +1,10 @@
 const ADD_NEW_POST = 'ADD-NEW-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
+const SET_USER_PROFILE = 'SET-USER-PROFILE';
+
 export const addPostActionCreator = () => ({type: ADD_NEW_POST});
 export const updatePostTextActionCreator = (newText) => ({type: UPDATE_POST_TEXT, newText: newText});
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile: profile});
 
 let initialState = {
     postArr: [
@@ -12,7 +15,8 @@ let initialState = {
         {id: Math.random(1, Date.now()), message: 'hello there!', count: '50'},
         {id: Math.random(1, Date.now()), message: 'hello there!!', count: '50'},
       ],
-    updatedText:  'hey!'
+    updatedText:  'hey!',
+    profile: null
 }
 const profileReducer = (state = initialState, action) => {
     
@@ -29,6 +33,11 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 updatedText: action.newText
+            }
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                profile: action.profile
             }
         default:
             return state

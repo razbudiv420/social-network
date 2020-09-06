@@ -5,23 +5,22 @@ const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
 const SET_TOTAL_COUNT = 'SET-TOTAL-COUNT'
 const TOGGLE_PRELOADER = 'TOGGLE-PRELOADER'
 
-export const followAC = (userId) => ({type: FOLLOW, userId: userId});
-export const unfollowAC = (userId) => ({type: UNFOLLOW, userId: userId});
-export const setUsersAC = (users) => ({type: SET_USERS, users: users});
-export const setCurrentPageAC = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage});
-export const setTotalCountAC = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount: totalCount});
-export const toggleLoadingAC = (isLoading) => ({type: TOGGLE_PRELOADER, isLoading: isLoading});
+export const follow = (userId) => ({type: FOLLOW, userId: userId});
+export const unfollow = (userId) => ({type: UNFOLLOW, userId: userId});
+export const setUsers = (users) => ({type: SET_USERS, users: users});
+export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage});
+export const setTotalCount = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount: totalCount});
+export const toggleLoading = (isLoading) => ({type: TOGGLE_PRELOADER, isLoading: isLoading});
 
 let initialState = {
     users: [],
     pageSize: 5,
-    totalCount: 10,
+    totalCount: 50,
     currentPage: 1,
     isLoading: true
 }
 
 const usersReducer = (state = initialState, action) => {
-    debugger;
     switch(action.type) {
         case FOLLOW: 
         return {

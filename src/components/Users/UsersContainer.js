@@ -1,5 +1,4 @@
-import { followAC, unfollowAC, setUsersAC, setCurrentPageAC, setTotalCountAC, toggleLoadingAC } from '../../redux/users-reducer';
-import Users from './UsersAPIContainer';
+import { follow, unfollow, setUsers, setCurrentPage, setTotalCount, toggleLoading } from '../../redux/users-reducer';
 import {connect} from 'react-redux';
 import UsersAPIContainer from './UsersAPIContainer';
 
@@ -15,18 +14,15 @@ const mapStateToProps = state => {
     }
 
 
-const mapDispatchToProps = dispatch => {
-    return {
-        follow: (userId) => {dispatch(followAC(userId))},
-        unfollow: (userId) => {dispatch(unfollowAC(userId))},
-        setUsers: (users) => {dispatch(setUsersAC(users))},
-        setCurrentPage: (currentPage) => {dispatch(setCurrentPageAC(currentPage))},
-        setTotalCount: (totalCount) => {dispatch(setTotalCountAC(totalCount))},
-        toggleLoading: (isLoading) => {dispatch(toggleLoadingAC(isLoading))}
-}
-}
 
-
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIContainer);
+const UsersContainer = connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalCount,
+    toggleLoading
+}
+)(UsersAPIContainer);
 
 export default UsersContainer;

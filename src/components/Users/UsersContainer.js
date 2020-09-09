@@ -1,5 +1,4 @@
 import { follow, unfollow, setUsers, setCurrentPage, setTotalCount, toggleLoading } from '../../redux/users-reducer';
-import Users from './UsersAPIContainer';
 import {connect} from 'react-redux';
 import UsersAPIContainer from './UsersAPIContainer';
 
@@ -15,15 +14,15 @@ const mapStateToProps = state => {
     }
 
 
-
-
 const UsersContainer = connect(mapStateToProps, {
     follow,
     unfollow,
     setUsers,
     setCurrentPage,
-    setTotalCount, 
-    toggleLoading 
-})(UsersAPIContainer);
+    setTotalCount,
+    toggleLoading
+}
+)(UsersAPIContainer);
+
 
 export default UsersContainer;

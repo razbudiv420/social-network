@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './components/Header/Header';
+import HeaderContainer from './components/Header/HeaderContainer';
 import Nav from './components/Nav/Nav';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer'
@@ -12,7 +12,7 @@ import {Route} from "react-router-dom";
 const App = (props) => {
   return (
     <div className = "app-wrapper">
-    <Header />
+    <HeaderContainer />
     <Nav />
     <div   className = "app-wrapper-content">
     <Route path = "/Dialogs"  render = {() => <DialogsContainer  dispatch = {props.dispatch} store={props.store}/>} />

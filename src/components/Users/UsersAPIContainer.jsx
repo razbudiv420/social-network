@@ -7,7 +7,7 @@ class UsersAPIContainer extends React.Component {
    
     componentDidMount = () => {
         this.props.toggleLoading(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials: true}).then(response => {
             this.props.toggleLoading(false);
             this.props.setUsers(response.data.items)
            //this.props.setTotalCount(response.data.totalCount)  
@@ -17,7 +17,7 @@ class UsersAPIContainer extends React.Component {
     onPageChange = (page) => {
         this.props.setCurrentPage(page)
         this.props.toggleLoading(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {withCredentials: true}).then(response => {
             this.props.toggleLoading(false);
             this.props.setUsers(response.data.items)
             //this.props.setTotalCount(response.data.totalCount)

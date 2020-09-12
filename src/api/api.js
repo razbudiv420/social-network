@@ -16,4 +16,21 @@ const usersAPI = {
         })
     }
 }
-export default usersAPI;
+
+const followAPI = {
+    follow(userId) {
+        return request.post(`follow/${userId}`)
+        .then(response => {
+            return response.data
+        })
+    },
+
+    unfollow(userId) {
+        return request.delete(`follow/${userId}`)
+        .then(response => {
+            return response.data
+        })
+    }
+}
+
+export  {usersAPI, followAPI};

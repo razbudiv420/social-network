@@ -2,9 +2,11 @@ import React from 'react';
 import * as axios from 'axios'
 import Users from './Users'
 import Preloader from '../Commons/Preloader';
-import usersAPI from '../../api/api';
+import {usersAPI} from '../../api/api';
+import { connect } from 'react-redux';
+import { follow, unfollow, setUsers, setCurrentPage, setTotalCount, toggleLoading, toggleFollowing } from '../../redux/users-reducer';
 
-class UsersAPIContainer extends React.Component {
+class UserContainer extends React.Component {
    
     componentDidMount = () => {
         this.props.toggleLoading(true);
@@ -29,6 +31,7 @@ class UsersAPIContainer extends React.Component {
         return <>
     {this.props.isLoading ? <Preloader/> : null}  
     <Users onPageChange = {this.onPageChange}
+           toggleFollowing = {this.props.toggleFollowing}
            currentPage  = {this.props.currentPage}
            pageSize     = {this.props.pageSize}
            totalCount   = {this.props.totalCount}
@@ -36,8 +39,34 @@ class UsersAPIContainer extends React.Component {
            unfollow     = {this.props.unfollow}
            users        = {this.props.users}
            isLoading    = {this.props.isLoading}
+           isFollowing  = {this.props.isFollowing}
     />
         </>
 }
 }
-export default UsersAPIContainer;
+
+const mapStateToProps = state => {
+    return { 
+        usersPage: state.usersPage,
+        pageSize: state.usersPage.pageSize,
+        totalCount: state.usersPage.totalCount,
+        currentPage: state.usersPage.currentPage,
+        users: state.usersPage.users,
+        isLoading: state.usersPage.isLoading,
+        isFollowing: state.usersPage.isFollowing
+}
+    }
+
+
+const UsersContainer = connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalCount,
+    toggleLoading,
+    toggleFollowing
+}
+)(UserContainer);
+
+export default UsersContainer;

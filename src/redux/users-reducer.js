@@ -1,3 +1,5 @@
+import {usersAPI, followAPI} from '../api/api'
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
@@ -6,14 +8,44 @@ const SET_TOTAL_COUNT = 'SET-TOTAL-COUNT'
 const TOGGLE_PRELOADER = 'TOGGLE-PRELOADER'
 const TOGGLE_FOLLOWING = 'TOGGLE-FOLLOWING'
 
-export const follow = (userId) => ({type: FOLLOW, userId: userId});
-export const unfollow = (userId) => ({type: UNFOLLOW, userId: userId});
+export const followSuccess = (userId) => ({type: FOLLOW, userId: userId});
+export const unfollowSuccess = (userId) => ({type: UNFOLLOW, userId: userId});
 export const setUsers = (users) => ({type: SET_USERS, users: users});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage});
 export const setTotalCount = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount: totalCount});
 export const toggleLoading = (isLoading) => ({type: TOGGLE_PRELOADER, isLoading: isLoading});
 export const toggleFollowing = (isLoading, userId) => ({type: TOGGLE_FOLLOWING, isLoading: isLoading, userId: userId});
 
+export const getUsers = (currentPage, pageSize) => {
+   return (dispatch) => {toggleLoading(true);
+        usersAPI.getUsers(currentPage, pageSize).then(response => {
+            dispatch(toggleLoading(false));
+            dispatch(setUsers(response.items));
+            dispatch(setCurrentPage(currentPage))
+           //this.props.setTotalCount(response.data.totalCount)  
+        })
+}
+}
+
+export const follow = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowing(true, userId))
+        followAPI.follow(userId).then(response=>{
+            if(response.resultCode == 0) dispatch(followSuccess(userId))
+            dispatch(toggleFollowing(false, userId))
+        })
+    }
+}
+
+export const unfollow = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowing(true, userId))
+        followAPI.unfollow(userId).then(response=>{
+            if(response.resultCode == 0) dispatch(unfollowSuccess(userId))
+            dispatch(toggleFollowing(false, userId))
+        })
+    }
+}
 
 let initialState = {
     users: [],

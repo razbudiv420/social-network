@@ -48,9 +48,6 @@ const mapStateToProps = state => {
 const UsersContainer = connect(mapStateToProps, {
     follow,
     unfollow,
-    setUsers,
-    setCurrentPage,
-    setTotalCount,
     toggleLoading,
     toggleFollowing,
     getUsers

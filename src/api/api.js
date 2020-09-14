@@ -33,4 +33,22 @@ const followAPI = {
     }
 }
 
-export  {usersAPI, followAPI};
+const authAPI = {
+    makeAuth() {
+        return request.get(`auth/me`)
+            .then(response => {
+                return response.data
+            })
+    }
+}
+
+const profileAPI = {
+    getProfile(userId) {
+        return request.get(`profile/${userId}`)
+            .then(response => {
+                return response.data
+            })
+    }
+}
+
+export  {usersAPI, followAPI, authAPI, profileAPI};

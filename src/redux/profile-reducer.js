@@ -1,3 +1,5 @@
+import {profileAPI} from '../api/api'
+
 const ADD_NEW_POST = 'ADD-NEW-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const SET_PROFILE = 'SET-PROFILE';
@@ -19,6 +21,17 @@ let initialState = {
     updatedText:  'hey!',
     profile: null
 }
+
+export const getProfile = (props) => {
+    return(dispatch) => {
+        let userId = props.match.params.userId
+            if(!userId) userId = 2;
+                profileAPI.getProfile(userId).then(response => {
+                     dispatch(setProfile(response))
+        })
+    }
+}
+
 const profileReducer = (state = initialState, action) => {
     
     switch (action.type) {

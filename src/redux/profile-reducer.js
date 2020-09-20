@@ -3,11 +3,12 @@ import {profileAPI} from '../api/api'
 const ADD_NEW_POST = 'ADD-NEW-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const SET_PROFILE = 'SET-PROFILE';
+const SET_STATUS = 'SET-STATUS';
 
 export const addPostActionCreator = () => ({type: ADD_NEW_POST});
 export const updatePostTextActionCreator = (newText) => ({type: UPDATE_POST_TEXT, newText: newText});
 export const setProfile = (profile) => ({type: SET_PROFILE, profile: profile})
-
+export const setStatus = (status) => ({type: SET_STATUS, status: status})
 
 let initialState = {
     postArr: [
@@ -19,18 +20,32 @@ let initialState = {
         {id: Math.random(1, Date.now()), message: 'hello there!!', count: '50'},
       ],
     updatedText:  'hey!',
-    profile: null
+    profile: null,
+    status: null
 }
 
-export const getProfile = (props) => {
-    return(dispatch) => {
-        let userId = props.match.params.userId
-            if(!userId) userId = 2;
-                profileAPI.getProfile(userId).then(response => {
-                     dispatch(setProfile(response))
+export const getProfile = (userId) => (dispatch) => {
+               
+    profileAPI.getProfile(userId).then(response => {
+                 dispatch(setProfile(response))
         })
-    }
 }
+
+export const getStatus = (userId) => (dispatch) => {
+    profileAPI.getStatus(userId).then(response => {
+        dispatch(setStatus(response));
+    })
+}
+
+export const updateStatus = (status) => (dispatch) => {
+    profileAPI.updateStatus(status).then(response =>{
+        if(response.resultCode === 0) {
+        dispatch(setStatus(status))
+        }
+    })
+}
+    
+
 
 const profileReducer = (state = initialState, action) => {
     
@@ -53,6 +68,12 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 profile: action.profile
             }
+        case SET_STATUS: {
+            return {
+                ...state,
+                status: action.status
+            }
+        }
         default:
             return state
     }

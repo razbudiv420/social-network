@@ -48,6 +48,20 @@ const profileAPI = {
             .then(response => {
                 return response.data
             })
+    },
+
+    getStatus(userId) {
+        return request.get(`profile/status/${userId}`)
+            .then(response => {
+                return response.data
+            })
+    },
+
+    updateStatus(status) {
+        return request.put(`profile/status/`, {status})
+            .then(response => {
+                return response.data
+            })
     }
 }
 

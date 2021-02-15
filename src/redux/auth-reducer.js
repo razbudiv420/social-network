@@ -4,7 +4,7 @@ let initialState = {
     id: null,
     email: null,
     login: null,
-    isAuth: true
+    isAuth: false
 }
 
 const SET_USER_DATA = 'SET-USER-DATA';

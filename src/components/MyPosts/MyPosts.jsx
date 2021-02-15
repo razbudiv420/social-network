@@ -1,34 +1,45 @@
 import React from 'react';
 import ms from './MyPosts.module.css';
 import Post from './Post/Post';
+import {Field, reduxForm} from 'redux-form'
 
 const MyPosts = (props) => {
   let post = props.postPage.postArr.map(postElement => <Post  key={postElement.id} message={postElement.message}  count={postElement.count}/>);
-  const addText = () => {
-    props.addText();
+
+  const addPost = (value) => {
+    props.addPost(value.newPost);
   } 
-  const update = (e) => {
-    props.update(e.target.value);
-  } 
+  
     return (
         <div className = {ms.space}>
         My posts
         <div>
           New post
           <div>
-          <div>
-          <textarea onChange={update} value={props.postPage.updatedText}></textarea>
-          </div>
-          <div>
-          <button onClick = {addText}>Add post</button>
-          <button>Remove</button>
-          </div>
+          <NewPostForm onSubmit={addPost}/>
           </div>
         </div>
         {post}
       </div>
     );
 }
+
+const NewPost = props => {
+  return (
+      <form onSubmit={props.handleSubmit}>
+        <div>
+          <Field name="newPost" component="textarea" type="text"></Field>
+        </div>
+       <div>
+         <button type="submit">Отправить</button>
+       </div>
+      </form>
+  )
+}
+
+const NewPostForm = reduxForm({
+  form: 'NewPostForm'
+})(NewPost)
 
 export default MyPosts;
 

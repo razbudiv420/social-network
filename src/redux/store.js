@@ -45,13 +45,13 @@ getState () {
 },
 
 subscribe (observer) {
-    this._callSubsciber = observer;
+    this._callSubsciber = observer
 },
 
 dispatch (action) {
-        this._state.dialogPage = dialogReducer(this._state.dialogPage, action);
-        this._state.postPage = profileReducer(this._state.postPage, action);
-        this._callSubsciber(this._state);
+        this._state.dialogPage = dialogReducer(this._state.dialogPage, action)
+        this._state.postPage = profileReducer(this._state.postPage, action)
+        this._callSubsciber(this._state)
 }
         
     }

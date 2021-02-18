@@ -1,4 +1,7 @@
 import React from 'react'
+import { Field } from 'redux-form'
+import { maxLength50 } from '../../helpers/validators'
+import CustomField from '../Commons/CustomField'
 
 class ProfileStatus extends React.Component{
 
@@ -42,5 +45,7 @@ class ProfileStatus extends React.Component{
     }
 
 }
+
+
 
 export default ProfileStatus

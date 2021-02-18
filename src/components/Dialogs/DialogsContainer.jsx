@@ -8,8 +8,7 @@ import withAuthRedirect from '../../hoc/withAuthRedirect';
 const mapStateToProps = state => {
     return {
     dialogsData: state.dialogPage.dialogsData,
-    messageData: state.dialogPage.messages,
-    value: state.dialogPage.updatedText,
+    messageData: state.dialogPage.messages
 }
 };
 

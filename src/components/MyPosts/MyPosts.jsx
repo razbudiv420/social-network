@@ -2,6 +2,8 @@ import React from 'react';
 import ms from './MyPosts.module.css';
 import Post from './Post/Post';
 import {Field, reduxForm} from 'redux-form'
+import CustomField from '../Commons/CustomField';
+import { maxLength200 } from '../../helpers/validators';
 
 const MyPosts = (props) => {
   let post = props.postPage.postArr.map(postElement => <Post  key={postElement.id} message={postElement.message}  count={postElement.count}/>);
@@ -28,7 +30,7 @@ const NewPost = props => {
   return (
       <form onSubmit={props.handleSubmit}>
         <div>
-          <Field name="newPost" component="textarea" type="text"></Field>
+          <Field name="newPost" component={CustomField} fieldType="textarea" label="Расскажите о своих мыслях" validate = {[maxLength200]}></Field>
         </div>
        <div>
          <button type="submit">Отправить</button>

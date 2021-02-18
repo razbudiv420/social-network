@@ -39,6 +39,18 @@ const authAPI = {
             .then(response => {
                 return response.data
             })
+    }, 
+    login (email, password, rememberMe = null) {
+        return request.post(`auth/login`, {email, password, rememberMe})
+            .then(response => {
+                return response.data
+            })
+    },
+    logout () {
+        return request.delete(`auth/login`)
+            .then(response => {
+                return response.data
+            })
     }
 }
 

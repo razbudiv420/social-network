@@ -22,6 +22,7 @@ export const getUsers = (currentPage, pageSize) => {
             dispatch(toggleLoading(false))
                 dispatch(setUsers(response.items))
                     dispatch(setCurrentPage(currentPage)) 
+                        //dispatch(setTotalCount(response.totalCount))
         })
 }
 }

@@ -1,0 +1,5 @@
+.activeError {
+    border: 2px solid red;
+    width: fit-content;
+    padding: 5px
+}

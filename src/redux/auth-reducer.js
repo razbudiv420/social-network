@@ -1,5 +1,5 @@
 import {authAPI} from '../api/api';
-
+import {stopSubmit} from 'redux-form'
 let initialState = {
     id: null,
     email: null,
@@ -27,6 +27,9 @@ export const loginAuth = (email, password, rememberMe) => {
     .then(response => {
         if(response.resultCode === 0) {
              dispatch(setAuth())
+        } else {
+            let errorMessage = response.messages.length > 0 ? response.messages[0] : "Authentification error"
+            dispatch(stopSubmit("LoginForm", {_error: errorMessage}))
         }
     })}
 }

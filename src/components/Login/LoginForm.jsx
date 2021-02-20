@@ -2,6 +2,7 @@ import React from 'react'
 import {Field, reduxForm} from 'redux-form'
 import {required, maxLength15} from '../../helpers/validators'
 import CustomField from '../Commons/CustomField'
+import styleError from './LoginErrors.module.css'
 
 const LoginFormToRedux = (props) => {
     return (
@@ -12,6 +13,7 @@ const LoginFormToRedux = (props) => {
                      <Field name="rememberMe" component={CustomField} type="checkbox" fieldType="checkbox" label={"Запомнить меня"} />
                  </div>
             <button type="submit">Войти</button>
+            { props.error && <div className={styleError.activeError}>{props.error}</div> }
         </form>
     )
 }

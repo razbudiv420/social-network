@@ -8,9 +8,22 @@ import News from './components/News/News';
 import Login from './components/Login/Login';
 import './App.css';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
-import {Route} from "react-router-dom";
+import {Route, withRouter} from "react-router-dom";
+import {setInitial} from './redux/initial-reducer'
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import Preloader from './components/Commons/Preloader';
 
-const App = (props) => {
+class App extends React.Component {
+
+  componentDidMount () {
+    this.props.setInitial()
+  }
+
+  render() {
+    if(!this.props.initialized) {
+      return <Preloader />
+    }
   return (
     <div className = "app-wrapper">
     <HeaderContainer />
@@ -25,9 +38,14 @@ const App = (props) => {
     </div>
     </div>
   );
+  }
 }
 
 
+const mapStateToProps = state => {
+    return {
+        initialized: state.initialize.initialized
+    }
+}
+export default compose(connect(mapStateToProps, {setInitial}), withRouter)(App)
 
-
-export default App;

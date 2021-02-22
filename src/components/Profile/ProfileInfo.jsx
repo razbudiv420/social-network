@@ -14,6 +14,7 @@ return (
       </div>
       <div className = {s.description}>
         <img src={props.profile.photos.large}></img>
+        <div>{props.profile.fullName}</div>
         <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
       </div>
       </div>

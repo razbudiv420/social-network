@@ -21,14 +21,14 @@ let initialState = {
     status: null
 }
 
-export const getProfile = (userId) => (dispatch) => {
+export const getProfileById = (userId) => (dispatch) => {
                
     profileAPI.getProfile(userId).then(response => {
                  dispatch(setProfile(response))
         })
 }
 
-export const getStatus = (userId) => (dispatch) => {
+export const getStatusById = (userId) => (dispatch) => {
     profileAPI.getStatus(userId).then(response => {
         dispatch(setStatus(response));
     })

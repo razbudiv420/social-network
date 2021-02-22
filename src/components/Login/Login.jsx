@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import {getIsAuth} from '../../redux/auth-selectors'
 import LoginForm from './LoginForm'
 import {loginAuth} from '../../redux/auth-reducer'
 import { Redirect } from 'react-router-dom'
@@ -9,7 +10,7 @@ const LoginToConnect = (props) => {
         props.loginAuth(value.email, value.password, value.rememberMe)
     }
 
-    if(props.auth.isAuth) {
+    if(props.isAuth) {
         return <Redirect to={'/Profile'}/>
     }
     return (
@@ -21,7 +22,7 @@ const LoginToConnect = (props) => {
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    isAuth: getIsAuth(state)
 })
 
 const Login = connect(mapStateToProps, {loginAuth})(LoginToConnect)

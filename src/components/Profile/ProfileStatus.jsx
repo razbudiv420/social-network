@@ -1,48 +1,38 @@
-import React from 'react'
-import { Field } from 'redux-form'
-import { maxLength50 } from '../../helpers/validators'
-import CustomField from '../Commons/CustomField'
+import React, { useEffect, useState } from 'react'
 
-class ProfileStatus extends React.Component{
 
-    state = {
-        editMode: false,
-        status: this.props.status
+const ProfileStatus = props => {
+
+    const [editMode, setEditMode] = useState(false)
+    const [status, setStatus] = useState(props.status)
+
+    useEffect( () => {
+        setStatus(props.status)
+    }, [props.status])
+
+    const activateEditMode = () => {
+        setEditMode(true)
+    }
+    
+    const deActivateEditMode = () => {
+        setEditMode(false)
+        props.updateStatus(status)
     }
 
-    componentDidUpdate(prevProps) {
-        if(prevProps.status !== this.props.status) {
-            this.setState({status: this.props.status})
-        }
+    const onStatusChange = (e) => {
+        setStatus(e.currentTarget.value)
     }
 
-    activateEditMode = () => {
-        this.setState({editMode: true})
-    }
-
-    deActivateEditMode = () => {
-        this.setState({editMode: false})
-        this.props.updateStatus(this.state.status)
-    }
-
-    onStatusChange = (e) => {
-        this.setState({
-            status: e.currentTarget.value
-        })
-    }
-
-    render() {
         return(
             <div>
-                {!this.state.editMode &&
-                <div><span onClick={this.activateEditMode}>{this.props.status || "----"}</span></div>
+                {!editMode &&
+                <div><span onClick={activateEditMode}>{props.status || "----"}</span></div>
                 }
-                {this.state.editMode &&
-                <div><input onChange={this.onStatusChange} autoFocus={true} onBlur={this.deActivateEditMode} value={this.state.status}/></div>
+                {editMode &&
+                <div><input onChange={onStatusChange} autoFocus={true} onBlur={deActivateEditMode} value={status}/></div>
                 }
             </div>
         )
-    }
 
 }
 
